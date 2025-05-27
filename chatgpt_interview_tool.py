@@ -4,9 +4,17 @@ import os # Operating system modules for environment variables
 
 # --- Configuration (OpenAI API Key Yahan Daalni Hai!) ---
 # OpenAI API key: https://platform.openai.com/account/api-keys
-# Yahan apni asli OpenAI API key paste karni hai double quotes ke andar.
-# Example: OPENAI_API_KEY = "sk-..."
-OPENAI_API_KEY = "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"
+# Ab API key seedhe code mein nahi hai. Yeh 'OPENAI_API_KEY' naam ke environment variable se read ki jayegi.
+# Jab aap Render.com par deploy karoge, tab aapko yeh environment variable wahan set karna hoga.
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+# Check if the API key is available
+if not OPENAI_API_KEY:
+    print("Error: OPENAI_API_KEY environment variable set nahi hai.")
+    print("Kripya ise set karein ya Render.com par environment variables mein add karein.")
+    # Exit or handle the error appropriately if the key is missing
+    # For local testing, you can set it in your system's environment variables.
+    # For Render.com, you will set it in their dashboard.
 
 openai.api_key = OPENAI_API_KEY
 
