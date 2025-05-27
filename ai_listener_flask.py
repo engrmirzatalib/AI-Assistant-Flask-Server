@@ -47,7 +47,7 @@ def get_groq_answer(question):
     except Exception as e:
         return f"Jawaab banate waqt koi error aa gayi: {e}"
 
-# --- Flask API Endpoint ---
+# --- Flask API Endpoint for /ask ---
 @app.route('/ask', methods=['POST'])
 def ask_ai():
     data = request.json # Client (phone) se aane wala data (question)
@@ -59,6 +59,15 @@ def ask_ai():
     answer = get_groq_answer(question)
     print(f"Sending answer: {answer}")
     return jsonify({"answer": answer})
+
+# --- NEW: Flask API Endpoint for root URL ('/') ---
+@app.route('/')
+def home():
+    """
+    This route handles requests to the root URL of the web service.
+    It returns a simple message to indicate that the server is running.
+    """
+    return jsonify({"message": "AI Assistant Flask Server is running! Use /ask endpoint for questions."})
 
 # --- Main Program (Server chalane ke liye) ---
 if __name__ == '__main__':
